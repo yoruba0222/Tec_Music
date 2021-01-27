@@ -14,7 +14,6 @@ public class Main {
                     // decide file name and score name in here 
                     try {
                               br = null;
-                              file_name_out = "Assets/template.t7";
                               file_name_in = args[2];
                     } catch(IndexOutOfBoundsException e) {
                               file_name_in = "Scores/Score.csv";
