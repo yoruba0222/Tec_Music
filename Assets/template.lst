@@ -50,10 +50,12 @@ ADR  CODE          Label   Instruction             Comment              Page(1)
 47  DA                     POP     G2             
 48  EC                     RET                    
 49                 
-49                 ;楽譜データ[長さ],[音階] ここから追記される.
+49                 ; MUSIC SHEET DATA ; [NOTE],[SCALE]
 49  84 00          SCORE   DC      132,0          
 4B  7D 87                  DC      125,135        
 4D  8C 78                  DC      140,120        
 4F  9D 6B                  DC      157,107        
 51  3E 87                  DC      62,135         
 53  7D 87                  DC      125,135        
+55  D3 50                  DC      211,80         
+57  5D 5A                  DC      93,90          

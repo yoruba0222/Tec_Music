@@ -48,7 +48,7 @@ LPT	NO
 	POP	G2
 	RET
 
-;楽譜データ[長さ],[音階] ここから追記される.
+; Music Sheet Data ; [Note],[Scale]
 SCORE	DC	132,0
 	DC	125,135
 	DC	140,120

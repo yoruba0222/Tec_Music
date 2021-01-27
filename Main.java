@@ -9,21 +9,13 @@ public class Main {
 
                     BufferedReader br = null;
                     FileWriter filewriter = null;
-                    String file_name_in, file_name_out = "Assets/template.t7";
-
-                    // decide file name and score name in here 
-                    try {
-                              br = null;
-                              file_name_in = args[2];
-                    } catch(IndexOutOfBoundsException e) {
-                              file_name_in = "Scores/Score.csv";
-                    }
+                    String file_name_in = "Scores/Score.csv", file_name_out = "Assets/template.t7";
 
                     System.out.println(file_name_in);
 
                     try {
                               File readfile = new File(file_name_in);
-                              File writefile = new File(file_name_out);
+                              //File writefile = new File(file_name_out);
                               filewriter = new FileWriter(file_name_out, true);
                               br = new BufferedReader(new FileReader(readfile));
 
@@ -40,7 +32,7 @@ public class Main {
                               line = br.readLine();
                               tmp = line.split(",");
 
-                              bpm = Integer.parseInt(tmp[2].substring(4, tmp[2].length()-1));
+                              bpm = Integer.parseInt(tmp[2].substring(6, tmp[2].length()-1));
 
                               //System.out.println(bpm);
 
@@ -87,21 +79,25 @@ public class Main {
                                                             }
                                                   }
                                         }
-                                        //// scale -1
-                                        //else if (tmp[1].contains("-")) {
-                                        //
-                                        //          data[1] = MusicScale[index] * 2;
-                                        //
-                                        //          if (tmp[1].contains("1")) {
-                                        //                    if (index != 6) {
-                                        //                              data[1] -= (MusicScale[index]*2-MusicScale[index+1]*2) * 2;
-                                        //                    }
-                                        //          } else if (tmp[1].contains("0")) {
-                                        //                    if (index != 0) {
-                                        //                              data[1] += (MusicScale[index-1]*2-MusicScale[index]*2) * 2;
-                                        //                    }
-                                        //          }
-                                        //}
+
+                                        // scale +2
+                                        // scale +1
+                                        if (tmp[1].contains("++")) {
+
+                                                  data[1] = MusicScale[index] / 4;
+
+                                                  // judge tmp[1] contains '♯' or '♭'
+                                                  // ♯
+                                                  if (tmp[1].contains("1")) {
+                                                            if (index != 6) {
+                                                                      data[1] -= (MusicScale[index]/4-MusicScale[index+1]/4) / 2;
+                                                            }
+                                                  } else if (tmp[1].contains("2")) {
+                                                            if (index != 0) {
+                                                                      data[1] += (MusicScale[index-1]/4-MusicScale[index]/2) / 4;
+                                                            }
+                                                  }
+                                        }
 
                                         if (tmp[0].contains(".")) noteLength = oneLength / (Integer.parseInt(tmp[0].substring(0, tmp[0].length()-1)));
                                         else noteLength = oneLength / (Integer.parseInt(tmp[0].substring(0, tmp[0].length())));
