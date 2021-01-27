@@ -1,0 +1,127 @@
+ADR  CODE          Label   Instruction             Comment              Page(1)
+
+00  1F DC                  LD      SP,#0DCH       
+02  17 49                  LD      G1,#SCORE      
+04  11 00          LOOP    LD      G0,0,G1        
+06  53 00                  CMP     G0,#0          
+08  A4 1E                  JZ      END            
+0A  19 01                  LD      G2,1,G1        
+0C  5B 00          P2      CMP     G2,#0          
+0E  A4 14                  JZ      R              
+10  B0 1F                  CALL    NOTE           
+12  A0 16                  JMP     P1             
+14  B0 2E          R       CALL    REST           
+16  43 01          P1      SUB     G0,#1          
+18  B4 0C                  JNZ     P2             
+1A  37 02                  ADD     G1,#2          
+1C  A0 04                  JMP     LOOP           
+1E  FF             END     HALT                   
+1F                 
+1F                 ;音を出力する
+1F  D0             NOTE    PUSH    G0             
+20  13 01                  LD      G0,#1          
+22  C3 01                  OUT     G0,01H         
+24  B0 3D                  CALL    TM10US         
+26  13 00                  LD      G0,#0          
+28  C3 01                  OUT     G0,01H         
+2A  B0 3D                  CALL    TM10US         
+2C  D2                     POP     G0             
+2D  EC                     RET                    
+2E                 
+2E                 ;給付を出力する
+2E  D0             REST    PUSH    G0             
+2F  13 00                  LD      G0,#0          
+31  C3 01                  OUT     G0,01H         
+33  B0 3D                  CALL    TM10US         
+35  13 00                  LD      G0,#0          
+37  C3 01                  OUT     G0,01H         
+39  B0 3D                  CALL    TM10US         
+3B  D2                     POP     G0             
+3C  EC                     RET                    
+3D                 
+3D  D8             TM10US  PUSH    G2             
+3E  00             LPT     NO                     
+3F  00                     NO                     
+40  00                     NO                     
+41  00                     NO                     
+42  00                     NO                     
+43  4B 01                  SUB     G2,#1          
+45  B4 3E                  JNZ     LPT            
+47  DA                     POP     G2             
+48  EC                     RET                    
+49                 
+49                 ; MUSIC SHEET DATA ; [NOTE],[SCALE]
+49  84 00          SCORE   DC      132,0          
+4B  FC 43                  DC      252,67         
+4D  FF 3B                  DC      255,59         
+4F  3D 3B                  DC      61,59          
+51  FF 35                  DC      255,53         
+53  5D 35                  DC      93,53          
+55  7E 43                  DC      126,67         
+57  FC 43                  DC      252,67         
+59  FF 26                  DC      255,38         
+5B  DB 26                  DC      219,38         
+5D  C4 2B                  DC      196,43         
+5F  84 00                  DC      132,0          
+61  9F 35                  DC      159,53         
+ADR  CODE          Label   Instruction             Comment              Page(2)
+
+63  8F 3B                  DC      143,59         
+65  7E 43                  DC      126,67         
+67  8F 3B                  DC      143,59         
+69  FF 43                  DC      255,67         
+6B  FF 43                  DC      255,67         
+6D  36 43                  DC      54,67          
+6F  FF 3B                  DC      255,59         
+71  FF 3B                  DC      255,59         
+73  7B 3B                  DC      123,59         
+75  FF 35                  DC      255,53         
+77  FF 35                  DC      255,53         
+79  BB 35                  DC      187,53         
+7B  FF 3B                  DC      255,59         
+7D  3D 3B                  DC      61,59          
+7F  FF 35                  DC      255,53         
+81  5D 35                  DC      93,53          
+83  FC 43                  DC      252,67         
+85  7E 43                  DC      126,67         
+87  FC 43                  DC      252,67         
+89  FF 35                  DC      255,53         
+8B  5D 35                  DC      93,53          
+8D  8F 3B                  DC      143,59         
+8F  84 00                  DC      132,0          
+91  FF 43                  DC      255,67         
+93  FF 43                  DC      255,67         
+95  36 43                  DC      54,67          
+97  FF 5A                  DC      255,90         
+99  37 5A                  DC      55,90          
+9B  BB 5A                  DC      187,90         
+9D  4E 6B                  DC      78,107         
+9F  5D 5A                  DC      93,90          
+A1  8F 3B                  DC      143,59         
+A3  FF 43                  DC      255,67         
+A5  FF 43                  DC      255,67         
+A7  36 43                  DC      54,67          
+A9  FF 3B                  DC      255,59         
+AB  3D 3B                  DC      61,59          
+AD  7E 43                  DC      126,67         
+AF  8F 3B                  DC      143,59         
+B1  FF 35                  DC      255,53         
+B3  5D 35                  DC      93,53          
+B5  7E 43                  DC      126,67         
+B7  FC 43                  DC      252,67         
+B9  FF 26                  DC      255,38         
+BB  DB 26                  DC      219,38         
+BD  C4 2B                  DC      196,43         
+BF  FF 2B                  DC      255,43         
+C1  FF 2B                  DC      255,43         
+C3  8B 2B                  DC      139,43         
+C5  21 00                  DC      33,0           
+C7  9F 35                  DC      159,53         
+C9  8F 3B                  DC      143,59         
+CB  7E 43                  DC      126,67         
+CD  8F 3B                  DC      143,59         
+CF  FF 43                  DC      255,67         
+D1  FF 43                  DC      255,67         
+D3  FF 43                  DC      255,67         
+D5  FF 43                  DC      255,67         
+D7  6D 43                  DC      109,67         

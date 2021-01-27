@@ -94,7 +94,7 @@ public class Main {
                                                             }
                                                   } else if (tmp[1].contains("2")) {
                                                             if (index != 0) {
-                                                                      data[1] += (MusicScale[index-1]/4-MusicScale[index]/2) / 4;
+                                                                      data[1] += (MusicScale[index-1]/4-MusicScale[index]/4) / 4;
                                                             }
                                                   }
                                         }
